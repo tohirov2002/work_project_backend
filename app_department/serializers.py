@@ -1,13 +1,6 @@
 from rest_framework import serializers
 
-from .models import DepartmentCategory, Department
-
-
-class DepartmentCategorySerializers(serializers.ModelSerializer):
-
-    class Meta:
-        model = DepartmentCategory
-        fields = '__all__'
+from .models import Department
 
 
 class DepartmentSerializers(serializers.ModelSerializer):
@@ -22,7 +15,7 @@ class DepartmentGetSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Department
-        fields = ('id', 'name', 'image')
+        fields = '__all__'
 
     def get_name(self, obj):
         try:

@@ -11,19 +11,15 @@ class NewsModel(models.Model):
     views = models.IntegerField(default=0)
     content_uz = models.CharField(max_length=500, null=True, blank=True)
     content_ru = models.CharField(max_length=500, null=True, blank=True)
-    description1_uz = models.TextField(null=True, blank=True)
-    description1_ru = models.TextField(null=True, blank=True)
-    description2_uz = models.TextField(null=True, blank=True)
-    description2_ru = models.TextField(null=True, blank=True)
-    description3_uz = models.TextField(null=True, blank=True)
-    description3_ru = models.TextField(null=True, blank=True)
+    description_uz = models.TextField(null=True, blank=True)
+    description_ru = models.TextField(null=True, blank=True)
     advice1_uz = models.TextField(null=True, blank=True)
     advice1_ru = models.TextField(null=True, blank=True)
     advice2_uz = models.TextField(null=True, blank=True)
     advice2_ru = models.TextField(null=True, blank=True)
     advice3_uz = models.TextField(null=True, blank=True)
     advice3_ru = models.TextField(null=True, blank=True)
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    # author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title_uz

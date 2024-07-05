@@ -9,4 +9,5 @@ from .permissions import IsAdminReadOnly
 class CommentView(viewsets.ModelViewSet):
     queryset = CommentsModel.objects.all()
     serializer_class = CommentSerializers
+    # permission_classes = [IsAdminReadOnly]
 

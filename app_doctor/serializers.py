@@ -11,8 +11,10 @@ class DoctorCategorySerializers(serializers.ModelSerializer):
 
 
 class DoctorSerializers(serializers.ModelSerializer):
-
+    category_name = serializers.SerializerMethodField()
     class Meta:
         model = Doctor
         fields = '__all__'
 
+    def get_category_name(self, obj):
+        return obj.category_name.category_name

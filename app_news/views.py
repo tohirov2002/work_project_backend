@@ -17,7 +17,7 @@ class NewsView(viewsets.ModelViewSet):
             if time() - float(request.COOKIES[title]) > 10:
                 up = True
             else:
-                up = True
+                up = False
         else:
             up = True
         if up:
