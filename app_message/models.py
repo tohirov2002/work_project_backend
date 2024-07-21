@@ -6,7 +6,6 @@ class MessageModel(models.Model):
     tel = models.CharField(max_length=20)
     sana = models.DateField()
     sms = models.TextField(blank=True, null=True)
-    fayl = models.FileField(upload_to='uploads/messages/', blank=True, null=True)
 
     def __str__(self):
         return self.ism

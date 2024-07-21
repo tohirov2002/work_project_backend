@@ -9,10 +9,11 @@ from django.core.files.base import ContentFile
 from urllib.parse import quote_plus
 from .serializers import ApplySerializer
 
-BOT_TOKEN = "7398859359:AAGicm9V51qZ2JUkLtRRhzc0k49VrrsYpGY"
+BOT_TOKEN = "7084496732:AAF4TCk72hqHbN1jE9A5wNiqIU3x1m9wjdg"
 QUERY_URL = "https://api.telegram.org/bot" + BOT_TOKEN
 SEND_MESSAGE = QUERY_URL + "/sendMessage"
 ID_ASR = "5585608431"
+
 
 class ApplyView(APIView):
     def post(self, request):
@@ -25,17 +26,15 @@ class ApplyView(APIView):
                 phone = serializer.validated_data['tel']
                 date = serializer.validated_data['sana']
                 msg = serializer.validated_data['sms'].replace("'", "‘")
-                fayl = serializer.validated_data['fayl']
                 ip = request.META.get('REMOTE_ADDR')
 
-                file_path = default_storage.save(f'fayllar/{fayl.name}', ContentFile(fayl.read()))
 
                 now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
                 msg_to_bot = (
                     "<b>|***********|\tYANGI XABAR\t|***********|\n\n{}\n\n|***********|\tYANGI XABAR\t|***********|</b>\n\n"
                     "<b>Ismi:</b> {}\n<b>Familiya:</b> {}\n<b>Telefoni:</b> {}\n<b>Tug'ilgan Sanasi:</b> {}\n<b>Vaqt:</b> {}\n<b>IP adres:</b> {}\n\n\n"
-                    "<b>🏢<a href='https://standart.mc.uz'>Sog'lom hayot kilinikasi </a></b>"
+                    "<b>🏢<a href='https://standart.mc.uz'>G'uzor tuman hokimligi</a></b>"
                 ).format(msg, who, familiya, phone, date, now, ip)
 
                 # Correctly pass the parse_mode parameter
@@ -48,8 +47,8 @@ class ApplyView(APIView):
                 # Save data to database
                 with connection.cursor() as cursor:
                     cursor.execute(
-                        "INSERT INTO message (ism, familiya, tel, sana, sms, fayl) VALUES (%s, %s, %s, %s, %s, %s)",
-                        [who, familiya, phone, date, msg, file_path]
+                        "INSERT INTO message (ism, familiya, tel, sana, sms) VALUES (%s, %s, %s, %s, %s)",
+                        [who, familiya, phone, date, msg]
                     )
 
                 # Respond with success message
