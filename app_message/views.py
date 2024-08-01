@@ -16,6 +16,7 @@ ID_ASR = "5585608431"
 
 
 class ApplyView(APIView):
+
     def post(self, request):
         serializer = ApplySerializer(data=request.data)
         if serializer.is_valid():
